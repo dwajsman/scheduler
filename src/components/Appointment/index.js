@@ -7,6 +7,7 @@ import Show from "./Show";
 
 
 export default function Appointment(props) {
+  // console.log("props",props, props.interview, props.time)
   return (
     <article className="appointment">
       <Header time={props.time}/>
@@ -14,3 +15,4 @@ export default function Appointment(props) {
     </article>
   )
 }
+

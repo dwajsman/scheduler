@@ -15,13 +15,14 @@ export default function DayList(props) {
     
   const daysInfo = props.days;
   const listDays = daysInfo.map((oneDay) =>
-    <DayListItem 
+    {
+      return <DayListItem
         key={oneDay.id}
-        name={oneDay.name} 
-        spots={oneDay.spots} 
+        name={oneDay.name}
+        spots={oneDay.spots}
         selected={oneDay.name === props.value}
-        setDay={props.onChange}  
-    />
+        setDay={props.onChange} />;
+    }
   );
 
   return(
