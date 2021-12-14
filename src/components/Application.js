@@ -22,7 +22,7 @@ export default function Application(props) {
   
 
   function bookInterview(id, interview) {
-    console.log("line 25", id, interview);
+    // console.log("line 25", id, interview);
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -41,7 +41,17 @@ export default function Application(props) {
       });
   }
 
-  
+
+  function cancelInterview(id) {
+    return axios.delete(`http://localhost:8001/api/appointments/${id}`,)
+      // .then((res) => {
+      //   setState({ ...state, appointments });
+      // })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   useEffect(() => {
    
     Promise.all([
@@ -74,6 +84,7 @@ export default function Application(props) {
         interview={interview}
         interviewers={interviewers}
         bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
       />
     );
   });
