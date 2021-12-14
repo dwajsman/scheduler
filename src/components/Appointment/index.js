@@ -4,13 +4,15 @@ import Header from './Header';
 import Empty from "./Empty";
 import Show from "./Show";
 import Form from "./Form";
+import Status from "./Status";
+
 
 import useVisualMode from "../../hooks/useVisualMode"
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
-const SAVE = "SAVE";
+const SAVING = "SAVING";
 
 const interviewers = [
   { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" },
@@ -33,7 +35,13 @@ export default function Appointment(props) {
       student: name,
       interviewer
     };
+    transition(SAVING);
+    props.bookInterview(props.id, interview)
+      .then(() => transition(SHOW))
   }
+
+
+
 
   return (
     <article className="appointment">
@@ -46,7 +54,8 @@ export default function Appointment(props) {
             interviewer={props.interview.interviewer}
           />)
       }
-      {mode === CREATE &&  <Form interviewers={interviewers} onCancel={() => back()}/> }
+      {mode === SAVING && <Status message={"Saving"} />}
+      {mode === CREATE &&  <Form interviewers={interviewers} onCancel={() => back()} onSave={save} /> }
       {/* {mode === SAVE &&  <Form interviewers={[]} onCancel={() => back()} onSave={props.bookInterview("YES", props.interview)}/> } */}
     </article>
   )

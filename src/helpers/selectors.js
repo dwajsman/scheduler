@@ -20,8 +20,6 @@ export const getAppointmentsForDay = function(state, day) {
     }
     
   });
-  // if (result.length === 0) {return};
-  // console.log("result", result)
   return result;
 };
 
@@ -32,7 +30,7 @@ export const getInterviewersForDay = function(state, day) {
   let result = []
 
   if (state.days.length === 0){
-    console.log("zero")
+    // console.log("zero")
     return [];
   }
 
@@ -42,11 +40,9 @@ export const getInterviewersForDay = function(state, day) {
         if (state.appointments[appointment].interview) {
 
           const myInterviewer = state.appointments[appointment].interview.interviewer;
-          console.log(myInterviewer)
           result.push(myInterviewer)     
           
         } else {
-          console.log("null")
           result.push(null)
         }
       });
@@ -54,7 +50,6 @@ export const getInterviewersForDay = function(state, day) {
 
   });
 
-  console.log("result", result)
   return result;
 };
 
@@ -62,21 +57,15 @@ export const getInterviewersForDay = function(state, day) {
 
 
 export const getInterview = function(state, interview){
-  // console.log("input", interview)
 
   if (!interview) {
-    console.log("null")
     return null;
   }
-  // console.log("getInterview", state.interviewers, interview.student)
-  // console.log(state.interviewers[interview.interviewer])
-  //state.interviewers[interview.interviewer];
   
   const result = {
     student: interview.student,
     interviewer: state.interviewers[interview.interviewer]
   }
-  console.log("result", result)
   return result;
 
 
