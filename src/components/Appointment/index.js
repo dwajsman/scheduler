@@ -38,7 +38,7 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
-  
+
   function save(name, interviewer) {
     const interview = {
       student: name,
@@ -75,6 +75,7 @@ export default function Appointment(props) {
       .catch(error => transition(ERROR_DELETE, true));
   }
 
+  console.log("hey hey", props.interviewer)
   return (
     <article className="appointment">
       <Header time={props.time}/>
@@ -82,6 +83,7 @@ export default function Appointment(props) {
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE) } />}
       {mode === SHOW && (
           <Show
+
             student={props.interview.student}
             interviewer={props.interview.interviewer}
             onDelete={deleteConf}

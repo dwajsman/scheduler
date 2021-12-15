@@ -16,12 +16,7 @@ export default function Application(props) {
   
   const { state, setDay, bookInterview, cancelInterview, editInterview } =  useApplicationData();
   
-  
 
-
-
-  
-  // const setDays = days => setState({ ...state, days });   LEGACY??? DEL?? 
 
 
   const appointments = getAppointmentsForDay(state, state.day);
