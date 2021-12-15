@@ -36,9 +36,9 @@ export default function Application(props) {
       .then((res) => {
         setState({ ...state, appointments });
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      // .catch((err) => {
+      //   console.log(err);
+      // });
   }
 
   function editInterview(id, interview) {
@@ -56,18 +56,18 @@ export default function Application(props) {
       .then((res) => {
         setState({ ...state, appointments });
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      // .catch((err) => {
+      //   console.log(err);
+      // });
   }
 
 
 
   function cancelInterview(id) {
     return axios.delete(`http://localhost:8001/api/appointments/${id}`,)
-      .catch((err) => {
-        console.log(err);
-      });
+      // .catch((err) => {
+      //   console.log(err);
+      // });
   }
 
   useEffect(() => {

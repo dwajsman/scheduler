@@ -52,17 +52,16 @@ export default function Appointment(props) {
   }
 
   function edit(id) {
-    // transition(EDIT);
+    transition(EDIT);
     props.bookInterview(props.id)
       .then(() => transition(EDIT))
-      .catch(error => transition(ERROR_SAVE, true));
+      // .catch(error => transition(ERROR_SAVE, true));
   }
 
   function deleteConf(id) {
     transition(DELETING, true);
     props.cancelInterview(props.id)
       .then(() => transition(EMPTY))
-      .catch(error => transition(ERROR_DELETE, true));
   }
 
 
@@ -93,8 +92,8 @@ export default function Appointment(props) {
       {mode === SAVING && <Status message={"Updating"} />}
       
       {mode === CREATE &&  <Form interviewers={interviewers} onCancel={() => back()} onSave={save} /> }
-      {mode === DELETING && <Confirm message={`Delete?`} 
-        onCancel={() => back()} onConfirm={() => {del(props.id)}} />}
+      {mode === DELETING && <Confirm message={"Delete?"} 
+        onCancel={() => transition(SHOW)} onConfirm={() => {del(props.id)}} />}
       {mode === EDIT && (
           <Form 
             student={props.interview.student}
@@ -107,14 +106,14 @@ export default function Appointment(props) {
       {mode === ERROR_SAVE && (
           <Error 
             message={"Could not save appointment"} 
-            onClose={() => back()}
+            onClose={() => transition(EMPTY)}
           />)
       } 
 
       {mode === ERROR_DELETE && (
           <Error 
             message={"Could not delete appointment"} 
-            onClose={() => back()}
+            onClose={() =>  transition(SHOW)}
           />)
       } 
 
