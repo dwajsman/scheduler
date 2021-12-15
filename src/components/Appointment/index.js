@@ -55,7 +55,6 @@ export default function Appointment(props) {
     transition(EDIT);
     props.bookInterview(props.id)
       .then(() => transition(EDIT))
-      // .catch(error => transition(ERROR_SAVE, true));
   }
 
   function deleteConf(id) {
@@ -92,8 +91,12 @@ export default function Appointment(props) {
       {mode === SAVING && <Status message={"Updating"} />}
       
       {mode === CREATE &&  <Form interviewers={interviewers} onCancel={() => back()} onSave={save} /> }
-      {mode === DELETING && <Confirm message={"Delete?"} 
-        onCancel={() => transition(SHOW)} onConfirm={() => {del(props.id)}} />}
+      {mode === DELETING && ( 
+          <Confirm 
+            message={"Delete?"} 
+            onCancel={() => transition(SHOW)}
+            onConfirm={() => {del(props.id)}} 
+          /> )}
       {mode === EDIT && (
           <Form 
             student={props.interview.student}
@@ -115,9 +118,7 @@ export default function Appointment(props) {
             message={"Could not delete appointment"} 
             onClose={() =>  transition(SHOW)}
           />)
-      } 
-
-      
+      }       
     </article>
   )
 }
