@@ -12,7 +12,7 @@ export default function Show(props) {
     return
   }
   
-  console.log("this one!", props.interviewer.name)
+  // console.log("this one!", props.interviewer.name)
 
   return (
     <main className="appointment__card appointment__card--show">

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import axios from "axios";
 
-import { getAppointmentsForDay } from "../helpers/selectors";
+// import { getAppointmentsForDay } from "../helpers/selectors";
 //   const interview = getInterview(state, appointment.interview);  // DEL??
 //   const appointments = getAppointmentsForDay(state, state.day);  // USED 
 //   const interviewers = getInterviewersForDay(state, state.day);  // DEL??
@@ -57,7 +57,7 @@ export default function useApplicationData() {
 
 
   const editInterview = function(id, interview) {
-    console.log("editInterview", id, interview);
+    // console.log("editInterview", id, interview);
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -96,13 +96,34 @@ export default function useApplicationData() {
   // }
   
 
-  function cancelInterview(id) {
-    let appointments = getAppointmentsForDay(state, state.day);
-    return axios.delete(`http://localhost:8001/api/appointments/${id}`,)
-    .then((res) => {
+  // BEFORE ANDY 
+  // function cancelInterview(id) {
+  //   let appointments = getAppointmentsForDay(state, state.day);
+  //   return axios.delete(`http://localhost:8001/api/appointments/${id}`,)
+  //   .then((res) => {
+  //       setState({ ...state, appointments });
+  //   })
+  // }
+
+
+  const cancelInterview = function(id, interview) {
+    // console.log("editInterview", id, interview);
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    // setState({ ...state, appointments });
+    return axios.delete(`http://localhost:8001/api/appointments/${id}`)
+      .then((res) => {
         setState({ ...state, appointments });
-    })
+      })
+
   }
+
 
 
   return { state, setDay, bookInterview, cancelInterview, editInterview }

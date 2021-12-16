@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import "./styles.scss";
 import Header from './Header';
 import Empty from "./Empty";
@@ -16,10 +16,11 @@ const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
 const SAVING = "SAVING";
-const DELETING = "DELETING";
 const EDIT = "EDIT";
 const ERROR_SAVE = "ERROR_SAVE";
 const ERROR_DELETE = "ERROR_DELETE";
+const CONFIRM = "CONFIRM";
+
 
 
 
@@ -58,9 +59,9 @@ export default function Appointment(props) {
   }
 
   function deleteConf(id) {
-    transition(DELETING, true);
-    props.cancelInterview(props.id)
-      .then(() => transition(EMPTY))
+    transition(CONFIRM);
+    // props.cancelInterview(props.id)
+    //   .then(() => transition(EMPTY))
   }
 
 
@@ -70,12 +71,12 @@ export default function Appointment(props) {
       interviewer
     };
     transition(SAVING);
-    props.cancelInterview(props.id, interview)
+    props.cancelInterview(id, interview)
       .then(() => transition(EMPTY))
       .catch(error => transition(ERROR_DELETE, true));
   }
 
-  console.log("hey hey", props.interviewer)
+  // console.log("hey hey", props.interviewer)
   return (
     <article className="appointment">
       <Header time={props.time}/>
@@ -92,7 +93,7 @@ export default function Appointment(props) {
       {mode === SAVING && <Status message={"Updating"} />}
       
       {mode === CREATE &&  <Form interviewers={interviewers} onCancel={() => back()} onSave={save} /> }
-      {mode === DELETING && ( 
+      {mode === CONFIRM && ( 
           <Confirm 
             message={"Delete?"} 
             onCancel={() => transition(SHOW)}
