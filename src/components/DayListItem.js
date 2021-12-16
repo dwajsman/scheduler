@@ -13,13 +13,18 @@ export default function DayListItem(props) {
   
 
   let spotInfo;
-
   if (props.spots === 0) {
     spotInfo = "no spots remaining";
+  // console.log(spotInfo)
+
   } else if (props.spots === 1) {
     spotInfo = "1 spot remaining";
+  // console.log(spotInfo)
+
   } else {
     spotInfo = props.spots + " spots remaining";
+  // console.log(spotInfo)
+
   }
 
 // 

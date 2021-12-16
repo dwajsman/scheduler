@@ -10,7 +10,7 @@ import axios from "axios";
 // import Application from "../components/Application";
 
 
-export default function useApplicationData() {
+export default function useApplicationData(props) {
   
   // LG - Connect to DB
   useEffect(() => {
@@ -49,9 +49,15 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
+    const days = [ ...state.days]
+    const dayID = state.days.findIndex( day => day.appointments.includes(id))
+    
+    console.log("dayID", dayID)
+    days[dayID].spots = spotsRemaining(dayID, appointments);
+
       return axios.put(`http://localhost:8001/api/appointments/${id}`, { interview })
       .then((res) => {
-        setState({ ...state, appointments });
+        setState({ ...state, appointments, days });
       })
   }
 
@@ -73,57 +79,54 @@ export default function useApplicationData() {
       })
 
   }
-    // EXAMPLE 
-    // axios
-    //   .delete(url)
-    //   .then(res => {
-    //     this.setState(previousState => {
-    //       return {
-    //         movies: previousState.movies.filter(m => m.id !== movie.id)
-    //       };
-    //     });
-    //   })
-  
-  // Version with GKG *** 
-  // const cancelInterview = function(id) {
-  //   let appointments = getAppointmentsForDay(state, state.day);  // USED 
-   
-  //   axios.delete(`http://localhost:8001/api/appointments/${id}`,).then(() => {
-  //       setState((prev) => {
-  //       appointments = appointments.filter(p => p.id !== appointments.id); 
-  //       return { ...prev, appointments};
-  //   });
-  // }
-  
+ 
 
-  // BEFORE ANDY 
-  // function cancelInterview(id) {
-  //   let appointments = getAppointmentsForDay(state, state.day);
-  //   return axios.delete(`http://localhost:8001/api/appointments/${id}`,)
-  //   .then((res) => {
-  //       setState({ ...state, appointments });
-  //   })
-  // }
-
-
-  const cancelInterview = function(id, interview) {
+  const cancelInterview = function(id) {
     // console.log("editInterview", id, interview);
     const appointment = {
       ...state.appointments[id],
-      interview: { ...interview }
+      interview: null
     };
     const appointments = {
       ...state.appointments,
       [id]: appointment
     };
+
+    const days = [ ...state.days]
+    const dayID = state.days.findIndex( day => day.appointments.includes(id))
+
+    // console.log(days[dayID])
+    days[dayID].spots = spotsRemaining(dayID, appointments);
+
     // setState({ ...state, appointments });
     return axios.delete(`http://localhost:8001/api/appointments/${id}`)
       .then((res) => {
-        setState({ ...state, appointments });
+        setState({ ...state, appointments, days });
       })
-
   }
 
+
+  const spotsRemaining = function (dayID, appointments){
+
+    // for (let index = 0; index < state.days.length; index++) {
+      const myDay = state.days[dayID];  
+
+      let sumOfNullSpots = 0;
+
+      myDay["appointments"].forEach(interviewID => {
+        if (appointments[interviewID]["interview"] === null) {
+          sumOfNullSpots++
+        }
+      });
+      
+      return sumOfNullSpots
+      
+    // }
+
+
+
+    
+  }
 
 
   return { state, setDay, bookInterview, cancelInterview, editInterview }

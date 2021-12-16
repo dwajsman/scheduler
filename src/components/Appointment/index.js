@@ -52,16 +52,20 @@ export default function Appointment(props) {
       .catch(error => transition(ERROR_SAVE, true));
   }
 
-  function edit(id) {
+  function edit(id, name, interviewer) {
+    const interview = {
+      student: name,
+      interviewer
+    };
     transition(EDIT);
-    props.bookInterview(props.id)
+    props.bookInterview(props.id, interview)
       .then(() => transition(EDIT))
   }
 
-  function deleteConf(id) {
+  function deleteConf(id, interview) {
     transition(CONFIRM);
     // props.cancelInterview(props.id)
-    //   .then(() => transition(EMPTY))
+      // .then(() => transition(EMPTY))
   }
 
 
@@ -70,8 +74,9 @@ export default function Appointment(props) {
       student: name,
       interviewer
     };
+    // console.log(interview, id)
     transition(SAVING);
-    props.cancelInterview(id, interview)
+    props.cancelInterview(id)
       .then(() => transition(EMPTY))
       .catch(error => transition(ERROR_DELETE, true));
   }
@@ -97,7 +102,7 @@ export default function Appointment(props) {
           <Confirm 
             message={"Delete?"} 
             onCancel={() => transition(SHOW)}
-            onConfirm={() => {del(props.id)}} 
+            onConfirm={() => {del(props.id, props.interview)}} 
           /> )}
       {mode === EDIT && (
           <Form 

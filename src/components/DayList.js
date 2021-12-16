@@ -15,7 +15,8 @@ export default function DayList(props) {
     
   const daysInfo = props.days;
   const listDays = daysInfo.map((oneDay) =>
-    {
+  {
+    
       return <DayListItem
         key={oneDay.id}
         name={oneDay.name}
