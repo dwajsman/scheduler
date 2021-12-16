@@ -40,17 +40,16 @@ export const getInterviewersForDay = function(state, day) {
   if (state.days.length === 0){
     return result;
   }
-
+  // const appointmentsUpdated = appointments.filter(p => p.id !== id);
   state.days.forEach(item => {
     if (item.name === day) {
       item.appointments.forEach(appointment => {
+        
         if (state.appointments[appointment].interview) {
-        // if (appointment.id === state.interviewers.id) {
-
+        
           const myInterviewer = state.appointments[appointment].interview.interviewer;
           result.push(myInterviewer)     
-          // result.push(state.interviewers[appointment]);
-          
+        
         } else {
           result.push(null)
         }
