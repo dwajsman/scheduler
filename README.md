@@ -58,8 +58,10 @@ npm run storybook
 ## About The Project
   Interview Scheduler is a single page React application that allows users to book and cancel interviews. 
 
-[![Product Name Screen Shot][product-screenshot]](https://github.com/dwajsman/scheduler/blob/master/public/images/1-main_screen.jpg)
+![Product Name Screen Shot](https://github.com/dwajsman/scheduler/blob/master/public/images/1-main_screen.jpg)
 
+
+!["screenshot Login page"](https://github.com/dwajsman/NewTinyApp/blob/master/docs/login-page.png)
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
