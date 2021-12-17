@@ -1,11 +1,9 @@
 import React from "react";
 
 import "components/Application.scss";
-// import DayListItem from 'components/DayListItem'; 
 import DayList from 'components/DayList';
 import Appointment from "components/Appointment/index";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
-// import { cleanup } from "@testing-library/react";
 import useApplicationData from "hooks/useApplicationData";
 
 

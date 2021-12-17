@@ -14,16 +14,9 @@ export const getAppointmentsForDay = function(state, day) {
 
     if (item.name === day) {
       item.appointments.forEach(appointment => {
-        // const parsedAppointment = 
-        // if (appointment === state.appointments[appointment].id) {
-          // if (!state.appointments[appointment].interview){
-          //   result.push (null) 
-          // } else
 
-          // console.log(state.appointments[appointment])
           result.push(state.appointments[appointment])   
-          // }     
-        // }
+
       });
     }
     
@@ -40,7 +33,7 @@ export const getInterviewersForDay = function(state, day) {
   if (state.days.length === 0){
     return result;
   }
-  // const appointmentsUpdated = appointments.filter(p => p.id !== id);
+
   state.days.forEach(item => {
     if (item.name === day) {
       item.appointments.forEach(appointment => {

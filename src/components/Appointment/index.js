@@ -33,7 +33,7 @@ const interviewers = [
 ];
 
 export default function Appointment(props) {
-  // console.log("props",props, props.interview, props.time)
+
 
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
@@ -64,28 +64,24 @@ export default function Appointment(props) {
 
   function deleteConf(id, interview) {
     transition(CONFIRM);
-    // props.cancelInterview(props.id)
-      // .then(() => transition(EMPTY))
   }
 
 
   function del(id, name, interviewer) {
-      const interview = {
+    const interview = {
       student: name,
       interviewer
     };
-    // console.log(interview, id)
     transition(SAVING);
     props.cancelInterview(id)
       .then(() => transition(EMPTY))
       .catch(error => transition(ERROR_DELETE, true));
   }
 
-  // console.log("hey hey", props.interviewer)
+
   return (
     <article className="appointment">
       <Header time={props.time}/>
-      {/* {props.interview ? <Show {...props.interview}/> : <Empty/> } */}
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE) } />}
       {mode === SHOW && (
           <Show

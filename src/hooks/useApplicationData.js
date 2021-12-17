@@ -2,17 +2,10 @@ import { useState, useEffect } from "react";
 
 import axios from "axios";
 
-// import { getAppointmentsForDay } from "../helpers/selectors";
-//   const interview = getInterview(state, appointment.interview);  // DEL??
-//   const appointments = getAppointmentsForDay(state, state.day);  // USED 
-//   const interviewers = getInterviewersForDay(state, state.day);  // DEL??
-
-// import Application from "../components/Application";
-
 
 export default function useApplicationData(props) {
   
-  // LG - Connect to DB
+
   useEffect(() => {
    
     Promise.all([
@@ -27,7 +20,7 @@ export default function useApplicationData(props) {
   },[])
   
 
-  // LG state
+
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -36,10 +29,10 @@ export default function useApplicationData(props) {
   });
   
 
-  // LG setDay  
+
   const setDay = day => setState({ ...state, day });
 
-  // REVIEW RETUN PART ***
+
   const bookInterview = function(id, interview) {
     const appointment = {
       ...state.appointments[id],
@@ -52,7 +45,7 @@ export default function useApplicationData(props) {
     const days = [ ...state.days]
     const dayID = state.days.findIndex( day => day.appointments.includes(id))
     
-    console.log("dayID", dayID)
+
     days[dayID].spots = spotsRemaining(dayID, appointments);
 
       return axios.put(`http://localhost:8001/api/appointments/${id}`, { interview })
@@ -63,7 +56,7 @@ export default function useApplicationData(props) {
 
 
   const editInterview = function(id, interview) {
-    // console.log("editInterview", id, interview);
+
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -72,7 +65,7 @@ export default function useApplicationData(props) {
       ...state.appointments,
       [id]: appointment
     };
-    // setState({ ...state, appointments });
+
     return axios.put(`http://localhost:8001/api/appointments/${id}`, { interview })
       .then((res) => {
         setState({ ...state, appointments });
@@ -82,7 +75,7 @@ export default function useApplicationData(props) {
  
 
   const cancelInterview = function(id) {
-    // console.log("editInterview", id, interview);
+
     const appointment = {
       ...state.appointments[id],
       interview: null
@@ -95,10 +88,10 @@ export default function useApplicationData(props) {
     const days = [ ...state.days]
     const dayID = state.days.findIndex( day => day.appointments.includes(id))
 
-    // console.log(days[dayID])
+
     days[dayID].spots = spotsRemaining(dayID, appointments);
 
-    // setState({ ...state, appointments });
+
     return axios.delete(`http://localhost:8001/api/appointments/${id}`)
       .then((res) => {
         setState({ ...state, appointments, days });
@@ -108,7 +101,7 @@ export default function useApplicationData(props) {
 
   const spotsRemaining = function (dayID, appointments){
 
-    // for (let index = 0; index < state.days.length; index++) {
+
       const myDay = state.days[dayID];  
 
       let sumOfNullSpots = 0;
@@ -121,7 +114,7 @@ export default function useApplicationData(props) {
       
       return sumOfNullSpots
       
-    // }
+
 
 
 
