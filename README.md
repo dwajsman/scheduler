@@ -62,4 +62,4 @@ To get a local copy up and running follow these simple example steps.
    ```
 
 ## Notes
-<p> This app was developed as part of the [Light House Labs](lighthouselabs.ca) bootcamp. </p>
+<p> This app was developed as part of the [Light House Labs](http://www.lighthouselabs.ca) bootcamp. </p>
