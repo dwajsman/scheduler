@@ -10,7 +10,8 @@ export default function DayList(props) {
   const listDays = daysInfo.map((oneDay) =>
   {
     
-      return <DayListItem
+      return <DayListItem 
+        data-cy="day"
         key={oneDay.id}
         name={oneDay.name}
         spots={oneDay.spots}
