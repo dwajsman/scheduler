@@ -36,6 +36,7 @@ export default function Appointment(props) {
 
 
   console.log("🙄 Index ", props.interviewers)
+
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
@@ -71,11 +72,11 @@ export default function Appointment(props) {
 
 
   function del(id, name, interviewer) {
-    // const interview = {
-    //   student: name,
-    //   interviewer: interviewer
+    const interview = {
+      student: name,
+      interviewer: interviewer
 
-    // };
+    };
     transition(SAVING);
     props.cancelInterview(id)
       .then(() => transition(EMPTY))

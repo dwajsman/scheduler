@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-// import { getAppointmentsForDay } from "helpers/selectors";
+import { getAppointmentsForDay } from "helpers/selectors";
 import axios from "axios";
 
 
@@ -36,12 +36,12 @@ export default function useApplicationData(props) {
 
   const setDay = day => setState({ ...state, day });
 
-  // const updateSpots = (state, appointments) => {
-  // const appointmentsArray = getAppointmentsForDay(
-  //   { ...state, appointments },
-  //   state.day
-  // );
-  // }
+  const updateSpots = (state, appointments) => {
+  const appointmentsArray = getAppointmentsForDay(
+    { ...state, appointments },
+    state.day
+  );
+  }
 
   const bookInterview = function(id, interview) {
     const appointment = {

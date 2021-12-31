@@ -26,35 +26,19 @@ export const getAppointmentsForDay = function(state, day) {
 
 
 
-export const getInterviewersForDay = function(state, day) {
-
-  let result = []
-
+export const getInterviewersForDay = (state, day) => {
   if (state.days.length === 0){
-    return result;
+    return [];
   }
+  
+  const selectedDay = state.days.find(
+    (appointment) => appointment.name === day
+  );
 
-  state.days.forEach(item => {
-    if (item.name === day) {
-      item.appointments.forEach(appointment => {
-        
-        if (state.appointments[appointment].interview) {
-        
-          const myInterviewer = state.appointments[appointment].interview.interviewer;
-          result.push(myInterviewer)     
-        
-        } else {
-          result.push(null)
-        }
-      });
-    }
-
+  return selectedDay.interviewers.map((interviewerId) => {
+    return state.interviewers[interviewerId];
   });
-
-  return result;
 };
-
-
 
 
 export const getInterview = function(state, interview){
