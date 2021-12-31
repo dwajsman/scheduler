@@ -1,3 +1,4 @@
+
 export const getAppointmentsForDay = function(state, day) {
 
   let result = []
@@ -25,7 +26,7 @@ export const getAppointmentsForDay = function(state, day) {
 };
 
 
-
+// returns list of interviewers available for a day
 export const getInterviewersForDay = (state, day) => {
   if (state.days.length === 0){
     return [];
@@ -40,7 +41,7 @@ export const getInterviewersForDay = (state, day) => {
   });
 };
 
-
+// returns interview info with interviewer info instead of ID 
 export const getInterview = function(state, interview){
 
   if (!interview) {

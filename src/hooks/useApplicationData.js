@@ -5,7 +5,7 @@ import axios from "axios";
 
 export default function useApplicationData(props) {
   
-
+  // API request 
   useEffect(() => {
    
     Promise.all([
@@ -32,10 +32,11 @@ export default function useApplicationData(props) {
   
 
 
-
+  // used by DayList component
   const setDay = day => setState({ ...state, day });
 
 
+  // function to book interviews 
   const bookInterview = function(id, interview) {
     const appointment = {
       ...state.appointments[id],
@@ -61,25 +62,7 @@ export default function useApplicationData(props) {
   }
 
 
-  // const editInterview = function(id, interview) {
-
-  //   const appointment = {
-  //     ...state.appointments[id],
-  //     interview: { ...interview }
-  //   };
-  //   const appointments = {
-  //     ...state.appointments,
-  //     [id]: appointment
-  //   };
-
-  //   return axios.put(`http://localhost:8001/api/appointments/${id}`, { interview })
-  //     .then((res) => {
-  //       setState({ ...state, appointments });
-  //     })
-
-  // }
- 
-
+  // function to cancel interview
   const cancelInterview = function(id) {
 
     const appointment = {
@@ -107,7 +90,7 @@ export default function useApplicationData(props) {
 
   }
 
-
+  // count null interview spots (empty spots)
   const spotsRemaining = function (dayID, appointments){
 
 

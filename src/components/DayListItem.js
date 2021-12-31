@@ -10,7 +10,7 @@ export default function DayListItem(props) {
 
   });
   
-
+  // adapts string to quantity of spots remaining (single, plural, none)
   let spotInfo;
   if (props.spots === 0) {
     spotInfo = "no spots remaining";
