@@ -17,8 +17,7 @@ export default function useApplicationData(props) {
       const [first, second, third] = all;
 
       setState(prev => ({...prev, days: first.data, appointments: second.data, interviewers: third.data }));
-    })
-    .catch((err) => console.log(err.message));
+    }).catch((err) => console.log(err.message));
 
   },[])
   
@@ -53,29 +52,32 @@ export default function useApplicationData(props) {
     days[dayID].spots = spotsRemaining(dayID, appointments);
 
       return axios.put(`http://localhost:8001/api/appointments/${id}`, { interview })
-      .then((res) => {
+      .then(() => {
         setState({ ...state, appointments, days });
       })
+      .catch((err) => console.log(err.message));
+
+
   }
 
 
-  const editInterview = function(id, interview) {
+  // const editInterview = function(id, interview) {
 
-    const appointment = {
-      ...state.appointments[id],
-      interview: { ...interview }
-    };
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
+  //   const appointment = {
+  //     ...state.appointments[id],
+  //     interview: { ...interview }
+  //   };
+  //   const appointments = {
+  //     ...state.appointments,
+  //     [id]: appointment
+  //   };
 
-    return axios.put(`http://localhost:8001/api/appointments/${id}`, { interview })
-      .then((res) => {
-        setState({ ...state, appointments });
-      })
+  //   return axios.put(`http://localhost:8001/api/appointments/${id}`, { interview })
+  //     .then((res) => {
+  //       setState({ ...state, appointments });
+  //     })
 
-  }
+  // }
  
 
   const cancelInterview = function(id) {
@@ -100,6 +102,9 @@ export default function useApplicationData(props) {
       .then((res) => {
         setState({ ...state, appointments, days });
       })
+      .catch((err) => console.log(err.message));
+
+
   }
 
 
@@ -122,6 +127,6 @@ export default function useApplicationData(props) {
   }
 
 
-  return { state, setDay, bookInterview, cancelInterview, editInterview }
+  return { state, setDay, bookInterview, cancelInterview }
   
 } // END of useApplicationData

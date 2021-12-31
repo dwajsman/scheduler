@@ -11,7 +11,7 @@ import useApplicationData from "hooks/useApplicationData";
 
 export default function Application(props) {
   
-  const { state, setDay, bookInterview, cancelInterview, editInterview } =  useApplicationData();
+  const { state, setDay, bookInterview, cancelInterview } =  useApplicationData();
   
 
 
@@ -31,7 +31,7 @@ export default function Application(props) {
         interviewers={interviewers}
         bookInterview={bookInterview}
         cancelInterview={cancelInterview}
-        editInterview={editInterview}
+        // editInterview={bookInterview}
 
       />
     );
