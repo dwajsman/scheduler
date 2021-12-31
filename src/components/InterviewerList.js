@@ -4,9 +4,9 @@ import InterviewerListItem from "components/InterviewerListItem";
 import PropTypes from "prop-types";
 
 export default function InterviewerList(props) {
-      console.log("💩",props.interviewers)
+      console.log("💩 InterviewerList",props.interviewers)
   const interviewersList = props.interviewers.map((interviewer) =>  
-    
+      // console.log("in map",interviewer)
       <InterviewerListItem
       key={interviewer.id}
       id={interviewer.id}
@@ -23,7 +23,7 @@ export default function InterviewerList(props) {
     <section className="interviewers">
       <h4 className="interviewers__header text--light">Interviewer</h4>
       <ul className="interviewers__list"> 
-        {/* {interviewersList} */}
+        {interviewersList}
       </ul>
       </section>
   )
