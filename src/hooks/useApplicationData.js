@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getAppointmentsForDay } from "helpers/selectors";
+
 import axios from "axios";
 
 
@@ -36,12 +36,6 @@ export default function useApplicationData(props) {
 
   const setDay = day => setState({ ...state, day });
 
-  const updateSpots = (state, appointments) => {
-  const appointmentsArray = getAppointmentsForDay(
-    { ...state, appointments },
-    state.day
-  );
-  }
 
   const bookInterview = function(id, interview) {
     const appointment = {
@@ -76,9 +70,6 @@ export default function useApplicationData(props) {
       [id]: appointment
     };
 
-    const interviewers = {
-      ...state.interviewers
-    };
     return axios.put(`http://localhost:8001/api/appointments/${id}`, { interview })
       .then((res) => {
         setState({ ...state, appointments });
