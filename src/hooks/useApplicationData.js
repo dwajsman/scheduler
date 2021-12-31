@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+// import { getAppointmentsForDay } from "helpers/selectors";
 import axios from "axios";
 
 
@@ -13,14 +13,17 @@ export default function useApplicationData(props) {
       axios.get('http://localhost:8001/api/appointments'),
       axios.get('http://localhost:8001/api/interviewers')
     ]).then((all) => {
+      // console.log(all);
       const [first, second, third] = all;
+      console.log(third.data);
       setState(prev => ({...prev, days: first.data, appointments: second.data, interviewers: third.data }));
-    });
+    })
+    .catch((err) => console.log(err.message));
 
   },[])
   
-
-
+  
+  
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -28,10 +31,17 @@ export default function useApplicationData(props) {
     interviewers:{}
   });
   
+  console.log("👹", state.interviewers);
 
 
   const setDay = day => setState({ ...state, day });
 
+  // const updateSpots = (state, appointments) => {
+  // const appointmentsArray = getAppointmentsForDay(
+  //   { ...state, appointments },
+  //   state.day
+  // );
+  // }
 
   const bookInterview = function(id, interview) {
     const appointment = {
@@ -66,6 +76,9 @@ export default function useApplicationData(props) {
       [id]: appointment
     };
 
+    const interviewers = {
+      ...state.interviewers
+    };
     return axios.put(`http://localhost:8001/api/appointments/${id}`, { interview })
       .then((res) => {
         setState({ ...state, appointments });
@@ -114,14 +127,10 @@ export default function useApplicationData(props) {
       
       return sumOfNullSpots
       
-
-
-
-
     
   }
 
 
   return { state, setDay, bookInterview, cancelInterview, editInterview }
   
-} // END of useApplicationData`
+} // END of useApplicationData

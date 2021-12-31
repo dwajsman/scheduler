@@ -24,17 +24,18 @@ const CONFIRM = "CONFIRM";
 
 
 
-const interviewers = [
-  { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" },
-  { id: 2, name: "Tori Malcolm", avatar: "https://i.imgur.com/Nmx0Qxo.png" },
-  { id: 3, name: "Mildred Nazir", avatar: "https://i.imgur.com/T2WwVfS.png" },
-  { id: 4, name: "Cohana Roy", avatar: "https://i.imgur.com/FK8V841.jpg" },
-  { id: 5, name: "Sven Jones", avatar: "https://i.imgur.com/twYrpay.jpg" }
-];
+// const interviewers = [
+//   { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" },
+//   { id: 2, name: "Tori Malcolm", avatar: "https://i.imgur.com/Nmx0Qxo.png" },
+//   { id: 3, name: "Mildred Nazir", avatar: "https://i.imgur.com/T2WwVfS.png" },
+//   { id: 4, name: "Cohana Roy", avatar: "https://i.imgur.com/FK8V841.jpg" },
+//   { id: 5, name: "Sven Jones", avatar: "https://i.imgur.com/twYrpay.jpg" }
+// ];
 
 export default function Appointment(props) {
 
 
+  console.log("🙄 Index ", props.interviewers)
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
@@ -43,7 +44,7 @@ export default function Appointment(props) {
   function save(name, interviewer) {
     const interview = {
       student: name,
-      interviewer
+      interviewer: interviewer
     };
     transition(SAVING);
     
@@ -54,8 +55,10 @@ export default function Appointment(props) {
 
   function edit(id, name, interviewer) {
     const interview = {
+      // id: id,
       student: name,
-      interviewer
+      interviewer: interviewer
+
     };
     transition(EDIT);
     props.bookInterview(props.id, interview)
@@ -68,10 +71,11 @@ export default function Appointment(props) {
 
 
   function del(id, name, interviewer) {
-    const interview = {
-      student: name,
-      interviewer
-    };
+    // const interview = {
+    //   student: name,
+    //   interviewer: interviewer
+
+    // };
     transition(SAVING);
     props.cancelInterview(id)
       .then(() => transition(EMPTY))
@@ -93,7 +97,7 @@ export default function Appointment(props) {
       }
       {mode === SAVING && <Status message={"Updating"} />}
       
-      {mode === CREATE &&  <Form interviewers={interviewers} onCancel={() => back()} onSave={save} /> }
+      {mode === CREATE &&  <Form interviewers={props.interviewers} onCancel={() => back()} onSave={save} /> }
       {mode === CONFIRM && ( 
           <Confirm 
             message={"Delete?"} 
@@ -103,7 +107,7 @@ export default function Appointment(props) {
       {mode === EDIT && (
           <Form 
             student={props.interview.student}
-            interviewers={interviewers} 
+            interviewers={props.interviewers} 
             interviewer={props.interview.interviewer.id}
             onCancel={() => back()} 
             onSave={save} 
