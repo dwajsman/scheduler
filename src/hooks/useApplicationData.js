@@ -13,9 +13,9 @@ export default function useApplicationData(props) {
       axios.get('http://localhost:8001/api/appointments'),
       axios.get('http://localhost:8001/api/interviewers')
     ]).then((all) => {
-      // console.log(all);
+
       const [first, second, third] = all;
-      console.log(third.data);
+
       setState(prev => ({...prev, days: first.data, appointments: second.data, interviewers: third.data }));
     })
     .catch((err) => console.log(err.message));
@@ -31,7 +31,7 @@ export default function useApplicationData(props) {
     interviewers:{}
   });
   
-  console.log("👹", state.interviewers);
+
 
 
   const setDay = day => setState({ ...state, day });

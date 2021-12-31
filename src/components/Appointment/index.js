@@ -35,7 +35,7 @@ const CONFIRM = "CONFIRM";
 export default function Appointment(props) {
 
 
-  console.log("🙄 Index ", props.interviewers)
+
 
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY

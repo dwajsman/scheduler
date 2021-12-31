@@ -4,7 +4,7 @@ import InterviewerListItem from "components/InterviewerListItem";
 import PropTypes from "prop-types";
 
 export default function InterviewerList(props) {
-      console.log("💩 InterviewerList",props.interviewers)
+
   const interviewersList = props.interviewers.map((interviewer) =>  
 
       <InterviewerListItem
